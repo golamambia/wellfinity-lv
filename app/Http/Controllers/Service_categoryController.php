@@ -107,7 +107,7 @@ class Service_categoryController extends Controller
 
 		if ($validator->fails())
 		{
-			return Redirect::to('admin/service_category/add')->withErrors($validator)->withInput(); 
+			return Redirect::to('admin/blog_category/add')->withErrors($validator)->withInput(); 
 		}
 		else
 		{
@@ -170,7 +170,7 @@ class Service_categoryController extends Controller
 
 		if ($validator->fails())
 		{
-			return Redirect::to('admin/service_category/edit/'.$id)->withErrors($validator)->withInput(); 
+			return Redirect::to('admin/blog_category/edit/'.$id)->withErrors($validator)->withInput(); 
 		}
 		else
 		{

@@ -45,12 +45,12 @@ $page_section_array = unserialize(Page_Section_Array);
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form role="form" action="{{ url('/admin/service_offer/add/') }}"  method="post" enctype="multipart/form-data" class="formvalidation">
+          <form role="form" action="{{ url('/admin/service/add/') }}"  method="post" enctype="multipart/form-data" class="formvalidation">
 
             @csrf
 
             <input type="hidden" name="id" value="0">
-            <input type="hidden" name="posttype" value="service_offer">
+            <input type="hidden" name="posttype" value="service">
 
             <div class="box-body">
 
@@ -875,6 +875,94 @@ $page_section_array = unserialize(Page_Section_Array);
     
   </div>
 </div>
+
+<div class="copy type22 hide"> 
+  <div class="sn">   
+    <div class="form-group clearfix">
+      <input type="hidden" name="section_type[]" value="22">
+      <input type="hidden" name="section_new_btn_text[]" value="">
+      <input type="hidden" name="section_new_btn_url[]" value="">
+      <label class="col-sm-2 control-label">Title</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="section_new_t[]" placeholder="Enter ..." value="" data-validation-engine="validate[required]">
+      </div>
+      <div class="col-sm-1"><a href="javascript:;" class="remove_field">Remove</a></div>
+    </div> 
+    <!-- <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Sub Title</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="section_new_st[]" placeholder="Enter ..." value="">
+      </div>
+    </div> -->
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Image</label>
+      <div class="col-sm-10">
+        <input type="file" name="section_new_img[]" data-validation-engine="validate[,custom[validateMIME[image/jpeg|image/jpg|image/png|image/gif|image/svg]]]">
+        Mime Type: jpeg,png,jpg,gif,svg, Max image upload size 2 Mb<br>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Image 2</label>
+      <div class="col-sm-10">
+        <input type="file" name="section_new_img2[]" data-validation-engine="validate[,custom[validateMIME[image/jpeg|image/jpg|image/png|image/gif|image/svg]]]">
+        Mime Type: jpeg,png,jpg,gif,svg, Max image upload size 2 Mb<br>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Content</label>
+      <div class="col-sm-10">
+        <textarea class="form-control ckeditor" name="section_new_c[]" placeholder="Enter ..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="copy type23 hide"> 
+  <div class="sn">   
+    <div class="form-group clearfix">
+      <input type="hidden" name="section_type[]" value="23">
+      <label class="col-sm-2 control-label">Title</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="section_new_t[]" placeholder="Enter ..." value="" data-validation-engine="validate[required]">
+      </div>
+      <div class="col-sm-1"><a href="javascript:;" class="remove_field">Remove</a></div>
+    </div> 
+    
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Image</label>
+      <div class="col-sm-10">
+        <input type="file" name="section_new_img[]" data-validation-engine="validate[,custom[validateMIME[image/jpeg|image/jpg|image/png|image/gif|image/svg]]]">
+        Mime Type: jpeg,png,jpg,gif,svg, Max image upload size 2 Mb<br>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Image 2</label>
+      <div class="col-sm-10">
+        <input type="file" name="section_new_img2[]" data-validation-engine="validate[,custom[validateMIME[image/jpeg|image/jpg|image/png|image/gif|image/svg]]]">
+        Mime Type: jpeg,png,jpg,gif,svg, Max image upload size 2 Mb<br>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Content</label>
+      <div class="col-sm-10">
+        <textarea class="form-control ckeditor" name="section_new_c[]" placeholder="Enter ..."></textarea>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Button Text</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="section_new_btn_text[]" placeholder="Enter ..." value="">
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Button URL</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="section_new_btn_url[]" placeholder="Enter ..." value="">
+      </div>
+    </div>
+  </div>
+</div>
+
 @section('more-scripts')
 <script type="text/javascript">
 $(document).ready(function() {

@@ -70,31 +70,14 @@ Route::post('/admin/page/update', [App\Http\Controllers\PageController::class, '
 Route::get('/admin/page-extra/delete/{id}', [App\Http\Controllers\PageController::class, 'page_extra_remove_image']);
 Route::get('/admin/page-extra/content-delete/{id}', [App\Http\Controllers\PageController::class, 'page_extra_remove']);
 Route::get('/admin/page/delete/{id}', [App\Http\Controllers\PageController::class, 'delete']);
-/*Location*/
-Route::get('/admin/location', [App\Http\Controllers\ServiceController::class, 'index']);
-Route::get('/admin/location/add', [App\Http\Controllers\ServiceController::class, 'add']);
-Route::post('/admin/location/add', [App\Http\Controllers\ServiceController::class, 'insert']);
-Route::get('/admin/location/edit/{id}', [App\Http\Controllers\ServiceController::class, 'edit']);
-Route::post('/admin/location/update', [App\Http\Controllers\ServiceController::class, 'update']);
-Route::get('/admin/location-extra/delete/{id}', [App\Http\Controllers\ServiceController::class, 'page_extra_remove_image']);
-Route::get('/admin/location-extra/content-delete/{id}', [App\Http\Controllers\ServiceController::class, 'page_extra_remove']);
-Route::get('/admin/location/delete/{id}', [App\Http\Controllers\ServiceController::class, 'delete']);
 
-/*Where to begin*/
-Route::get('/admin/where_begin', [App\Http\Controllers\WhereBeginController::class, 'index']);
-Route::get('/admin/where_begin/add', [App\Http\Controllers\WhereBeginController::class, 'add']);
-Route::post('/admin/where_begin/add', [App\Http\Controllers\WhereBeginController::class, 'insert']);
-Route::get('/admin/where_begin/edit/{id}', [App\Http\Controllers\WhereBeginController::class, 'edit']);
-Route::post('/admin/where_begin/update', [App\Http\Controllers\WhereBeginController::class, 'update']);
-Route::get('/admin/where_begin-extra/delete/{id}', [App\Http\Controllers\WhereBeginController::class, 'page_extra_remove_image']);
-Route::get('/admin/where_begin-extra/content-delete/{id}', [App\Http\Controllers\WhereBeginController::class, 'page_extra_remove']);
-Route::get('/admin/where_begin/delete/{id}', [App\Http\Controllers\WhereBeginController::class, 'delete']);
+
 /*service offer*/
-Route::get('/admin/service_offer', [App\Http\Controllers\ServiceOfferedController::class, 'index']);
-Route::get('/admin/service_offer/add', [App\Http\Controllers\ServiceOfferedController::class, 'add']);
-Route::post('/admin/service_offer/add', [App\Http\Controllers\ServiceOfferedController::class, 'insert']);
-Route::get('/admin/service_offer/edit/{id}', [App\Http\Controllers\ServiceOfferedController::class, 'edit']);
-Route::post('/admin/service_offer/update', [App\Http\Controllers\ServiceOfferedController::class, 'update']);
+Route::get('/admin/service', [App\Http\Controllers\ServiceOfferedController::class, 'index']);
+Route::get('/admin/service/add', [App\Http\Controllers\ServiceOfferedController::class, 'add']);
+Route::post('/admin/service/add', [App\Http\Controllers\ServiceOfferedController::class, 'insert']);
+Route::get('/admin/service/edit/{id}', [App\Http\Controllers\ServiceOfferedController::class, 'edit']);
+Route::post('/admin/service/update', [App\Http\Controllers\ServiceOfferedController::class, 'update']);
 Route::get('/admin/service-offer-extra/delete/{id}', [App\Http\Controllers\ServiceOfferedController::class, 'page_extra_remove_image']);
 Route::get('/admin/service-offer-extra/content-delete/{id}', [App\Http\Controllers\ServiceOfferedController::class, 'page_extra_remove']);
 Route::get('/admin/service_offer/delete/{id}', [App\Http\Controllers\ServiceOfferedController::class, 'delete']);
@@ -127,14 +110,14 @@ Route::post('/admin/post/update', [App\Http\Controllers\PageController::class, '
 //Route::get('/admin/service/file-destroy/{id}', [App\Http\Controllers\PageController::class, 'file_destroy']);
 
 /*Service category*/
-Route::get('/admin/service_category', [App\Http\Controllers\Service_categoryController::class, 'index']);
-Route::get('/admin/service_category/add', [App\Http\Controllers\Service_categoryController::class, 'add']);
-Route::post('/admin/service_category/add', [App\Http\Controllers\Service_categoryController::class, 'insert']);
-Route::get('/admin/service_category/edit/{id}', [App\Http\Controllers\Service_categoryController::class, 'edit']);
-Route::post('/admin/service_category/update', [App\Http\Controllers\Service_categoryController::class, 'update']);
-Route::get('/admin/service_category/delete/{id}', [App\Http\Controllers\Service_categoryController::class, 'delete']);
-Route::get('/admin/service_category/status/{id}/{status}', [App\Http\Controllers\Service_categoryController::class, 'status']);
-Route::get('/admin/service_category/file-destroy/{id}', [App\Http\Controllers\Service_categoryController::class, 'file_destroy']);
+Route::get('/admin/blog_category', [App\Http\Controllers\Service_categoryController::class, 'index']);
+Route::get('/admin/blog_category/add', [App\Http\Controllers\Service_categoryController::class, 'add']);
+Route::post('/admin/blog_category/add', [App\Http\Controllers\Service_categoryController::class, 'insert']);
+Route::get('/admin/blog_category/edit/{id}', [App\Http\Controllers\Service_categoryController::class, 'edit']);
+Route::post('/admin/blog_category/update', [App\Http\Controllers\Service_categoryController::class, 'update']);
+Route::get('/admin/blog_category/delete/{id}', [App\Http\Controllers\Service_categoryController::class, 'delete']);
+Route::get('/admin/blog_category/status/{id}/{status}', [App\Http\Controllers\Service_categoryController::class, 'status']);
+Route::get('/admin/blog_category/file-destroy/{id}', [App\Http\Controllers\Service_categoryController::class, 'file_destroy']);
 /*Service work*/
 Route::get('/admin/service_work', [App\Http\Controllers\Service_workController::class, 'index']);
 Route::get('/admin/service_work/add', [App\Http\Controllers\Service_workController::class, 'add']);
@@ -206,7 +189,8 @@ Route::post('/paymentform', [App\Http\Controllers\PageController::class, 'paymen
 Route::post('/homeform', [App\Http\Controllers\PageController::class, 'homeform']);
 Route::post('/careerform', [App\Http\Controllers\PageController::class, 'careerform']);
 Route::post('/book_appoinment', [App\Http\Controllers\PageController::class, 'book_appoinment']);
-
+Route::post('/comment', [App\Http\Controllers\PageController::class, 'commentform']);
+Route::post('/sub-form', [App\Http\Controllers\PageController::class, 'subscribe_form']);
 Route::get('/{slug}', [App\Http\Controllers\PageController::class, 'ShowPage']);
 Route::get('/service/{id}', [App\Http\Controllers\PageController::class, 'ShowPageService']);
 

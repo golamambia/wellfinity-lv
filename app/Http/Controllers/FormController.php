@@ -40,7 +40,7 @@ class FormController extends Controller
 			$order = 'desc';
 		}
 		if ($form=='0') {
-		$column_array = array('id' => 'Id', 'fname' => 'First Name', 'lname' => 'Last Name','email' => 'Email','message' => 'Message', 'created_at' => 'Created At');
+		$column_array = array('id' => 'Id', 'name' => 'Name','email' => 'Email','message' => 'Message', 'created_at' => 'Created At');
 		}
 		else if ($form=='1') {
 			$column_array = array('id' => 'Id', 'name' => 'Name','email' => 'Email','phone' => 'Phone','created_at' => 'Created At');

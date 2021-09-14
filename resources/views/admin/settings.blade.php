@@ -107,7 +107,7 @@ $currency=$currency_with_icon_array[$_SESSION['currency']];
 
                 </div>
               </div>
-              <div class="form-group clearfix">
+          <!--     <div class="form-group clearfix">
                 <label class="col-sm-2 control-label">Footer Banner</label>
                 <div class="col-sm-10">
                   <input type="file" name="site_withoutbanner_logo">
@@ -125,7 +125,7 @@ $currency=$currency_with_icon_array[$_SESSION['currency']];
                   </div>
 
                 </div>
-              </div>
+              </div> -->
 
               <!-- <div class="form-group clearfix">
                 <label class="col-sm-2 control-label">Inner Page Logo</label>
@@ -357,6 +357,13 @@ $currency=$currency_with_icon_array[$_SESSION['currency']];
                   <label class="col-sm-2 control-label">Social Title</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" name="site_social_title" id="site_social_title" placeholder="Enter ..." value="{!!config('site.social_title')!!}">
+                  </div>
+                </div>
+                
+                <div class="form-group clearfix">
+                  <label class="col-sm-2 control-label">All Rights Reserved</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="site_right_reserve" id="site_address_title" placeholder="Enter ..." value="{!!config('site.right_reserve')!!}">
                   </div>
                 </div>
 

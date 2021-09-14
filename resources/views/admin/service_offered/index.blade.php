@@ -7,11 +7,11 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Service Offered
+      Services
     </h1>
     <ol class="breadcrumb">
       <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"> Service Offered</li>
+      <li class="active"> Services</li>
     </ol>
   </section>
 
@@ -90,7 +90,7 @@
                   @endforeach
 
                   <td>
-                    <a href="{{ url('/admin/service_offer/edit/'.$page->id) }}" title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                    <a href="{{ url('/admin/service/edit/'.$page->id) }}" title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                     <a href="{{ url($page->slug) }}" title="View" target="_blank"><i class="fa fa-fw fa-eye"></i></a>
                     @if($page->id>0)
                     <a href="{{ url('/admin/service_offer/delete/'.$page->id) }}" onclick="return confirm('Are you sure?');" title="Delete"><i class="fa fa-fw fa-close"></i></a>

@@ -54,7 +54,7 @@ $form_array = unserialize(Form_Array);
               <div class="row">
                 <div class="col-sm-12"> 
 
-                  @if($list->type=='1' || $list->type=='3' || $list->type=='4')
+                  @if($list->type=='0')
                   <div class="form-group clearfix">
                     <label class="col-sm-3 control-label">Name</label>
                     <div class="col-sm-6">{{$list->name}} </div>
@@ -75,12 +75,12 @@ $form_array = unserialize(Form_Array);
                     <label class="col-sm-3 control-label">Email</label>
                     <div class="col-sm-6">{{$list->email}} </div>
                   </div>
-                   <div class="form-group clearfix">
+                   <!-- <div class="form-group clearfix">
                     <label class="col-sm-3 control-label">Phone Number</label>
                     <div class="col-sm-6">{{$list->phone}} </div>
-                  </div>
+                  </div> -->
                    @if($list->type=='0')
-                   <div class="form-group clearfix">
+               <!--     <div class="form-group clearfix">
                     <label class="col-sm-3 control-label">Address</label>
                     <div class="col-sm-6">{{$list->address}} </div>
                   </div>
@@ -95,10 +95,10 @@ $form_array = unserialize(Form_Array);
                   <div class="form-group clearfix">
                     <label class="col-sm-3 control-label">City</label>
                     <div class="col-sm-6">{{$list->city}} </div>
-                  </div>
+                  </div> -->
                   <div class="form-group clearfix">
-                    <label class="col-sm-3 control-label">Reason for contact</label>
-                    <div class="col-sm-6">{{$list->reason}} </div>
+                    <label class="col-sm-3 control-label">Website</label>
+                    <div class="col-sm-6">{{$list->website}} </div>
                   </div>
                   <div class="form-group clearfix">
                     <label class="col-sm-3 control-label">Message</label>

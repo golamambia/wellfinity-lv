@@ -1,90 +1,76 @@
 @include('frontend.header')
+<?php
+$bloglist = get_fields_value_where('pages',"posttype='post'",'id','desc');
 
-<div class="inner-banner" style="background: url({{ asset('frontend') }}/images/inner-banner-bg.png) no-repeat center">
+
+?>
+  @foreach($extra_data as $val)
+    @if($val->type==1)
+<div class="inner-banner" style="background: url({{ asset('/uploads/'.$val->image) }}) no-repeat center">
     <div class="container">
-        <h1>We work with companies of all sizes</h1>
+         @if($val->title)<h1>{!!$val->title!!}</h1>@endif
         <ul>
-            <li>Blog</li>
+            <li>{{$page->page_title}}</li>
         </ul>
     </div>
 </div>
+ @endif
+    @endforeach
 <div class="blog">
     <div class="container">
         <div class="center-txt">
-            <h2>Our <span>Blog</span></h2>
+           @foreach($extra_data as $val)
+    @if($val->type==2)
+            @if($val->title)<h2>{!!$val->title!!}</h2>@endif
             <div class="clear-fix"></div>
-            <p>Keep up to date with our latest blogs, newsletters and top tips! We bring you content from Industry Leaders.</p>
+            <p>{!!$val->sub_title!!}</p>
+             @endif
+    @endforeach
         </div>
         <div class="row">
             <div class="col-lg-8 col-md-8">
+               @php($count=0)
+               @if($lists->count() > 0)
+ @foreach($lists as $lt_val)
+ <?php
+$extra_datamn = get_fields_value_where('pages_extra',"page_id=".$lt_val->id,'id','desc');
+$i=0;
+?>
+               
+   
+    @php($count++)
                 <div class="blog-hldr">
                     <div class="img-hldr">
-                        <a href="#"><img src="{{ asset('frontend') }}/images/blog.png" alt=""></a>
+                        <a href="{{url('/'.$lt_val->slug)}}"><img src="{{ asset('/uploads/'.$lt_val->bannerimage) }}" alt=""></a>
                     </div>
-                    <h3><a href="#">Ten Tips for Working from Home</a><i class="zmdi zmdi-share"></i></h3>
+                    <!-- <h3><a href="{{url('/'.$lt_val->slug)}}">{{ asset('/uploads/'.$lt_val->bannerimage) }}</a><i class="zmdi zmdi-share"></i></h3> -->
                     <ul>
-                        <li>BY <span>WELLFINITY</span> | UNCATEGORIZED</li>
-                        <li><i class="zmdi zmdi-comments"></i> 5k Comments</li>
+                        <li>BY <span style="text-transform: uppercase;">{!!config('site.title')!!}</span> | {!!$lt_val->cat_name!!}</li>
+                        <!-- <li><i class="zmdi zmdi-comments"></i> 5k Comments</li> -->
                     </ul>
                     <hr>
-                    <p>Being able to work from home pre-COVID might have seemed like a dream, far preferable to the Monday-Friday office grind.</p>
-                    <p>Sleeping in, working in pj’s, making fresh lunches, saving hours and hundreds of dollars or pounds a month on commutes (actually, always a win!), there’s a lot to like about it. Some of us, like the Wellfinity team, are used to working remotely — making cafes, co-working spaces, gym lounges, restaurants and our homes our very own workspaces.
-                    </p>
-                    <p>But with the pandemic, working from home has become a mandate for many employees who aren’t prepared for the subtle and not-so-subtle changes to their day.</p>
-                    <a href="#" class="rdmr">Read more</a>
+                    {{substr(strip_tags($lt_val->body),0,500)}}...
+                    
+                    <a href="{{url('/'.$lt_val->slug)}}" class="rdmr">Read more</a>
                 </div>
-                <div class="blog-hldr">
-                    <div class="img-hldr">
-                        <a href="#">
-                            <img src="{{ asset('frontend') }}/images/blog.png" alt="">
-                            <div class="date">13<span>Jan, 2021</span></div>
-                        </a>
-                    </div>
-                    <h3><a href="#"><span>Ten Tips</span> for Working from Home</a><i class="zmdi zmdi-share"></i></h3>
-                    <ul>
-                        <li>BY <span>WELLFINITY</span> | UNCATEGORIZED</li>
-                        <li><i class="zmdi zmdi-comments"></i> 5k Comments</li>
-                    </ul>
-                    <hr>
-                    <p>Being able to work from home pre-COVID might have seemed like a dream, far preferable to the Monday-Friday office grind.</p>
-                    <p>Sleeping in, working in pj’s, making fresh lunches, saving hours and hundreds of dollars or pounds a month on commutes (actually, always a win!), there’s a lot to like about it. Some of us, like the Wellfinity team, are used to working remotely — making cafes, co-working spaces, gym lounges, restaurants and our homes our very own workspaces.
-                    </p>
-                    <p>But with the pandemic, working from home has become a mandate for many employees who aren’t prepared for the subtle and not-so-subtle changes to their day.</p>
-                    <a href="#" class="rdmr">Read more</a>
+
+           
+ 
+             @endforeach
+             @else
+
+
+             <div class="blog-hldr">
+                   <br><br>
+                  <h3 style="color: #c22727;
+    text-align: center;">No blog found!</h3>
+                  
                 </div>
-                <div class="blog-hldr">
-                    <div class="img-hldr">
-                        <a href="#"><img src="{{ asset('frontend') }}/images/blog.png" alt=""></a>
-                    </div>
-                    <h3><a href="#">Ten Tips for Working from Home</a><i class="zmdi zmdi-share"></i></h3>
-                    <ul>
-                        <li>BY <span>WELLFINITY</span> | UNCATEGORIZED</li>
-                        <li><i class="zmdi zmdi-comments"></i> 5k Comments</li>
-                    </ul>
-                    <hr>
-                    <p>Being able to work from home pre-COVID might have seemed like a dream, far preferable to the Monday-Friday office grind.</p>
-                    <p>Sleeping in, working in pj’s, making fresh lunches, saving hours and hundreds of dollars or pounds a month on commutes (actually, always a win!), there’s a lot to like about it. Some of us, like the Wellfinity team, are used to working remotely — making cafes, co-working spaces, gym lounges, restaurants and our homes our very own workspaces.
-                    </p>
-                    <p>But with the pandemic, working from home has become a mandate for many employees who aren’t prepared for the subtle and not-so-subtle changes to their day.</p>
-                    <a href="#" class="rdmr">Read more</a>
-                </div>
-                <div class="blog-hldr">
-                    <div class="img-hldr">
-                        <a href="#"><img src="{{ asset('frontend') }}/images/blog.png" alt=""></a>
-                    </div>
-                    <h3><a href="#">Ten Tips for Working from Home</a><i class="zmdi zmdi-share"></i></h3>
-                    <ul>
-                        <li>BY <span>WELLFINITY</span> | UNCATEGORIZED</li>
-                        <li><i class="zmdi zmdi-comments"></i> 5k Comments</li>
-                    </ul>
-                    <hr>
-                    <p>Being able to work from home pre-COVID might have seemed like a dream, far preferable to the Monday-Friday office grind.</p>
-                    <p>Sleeping in, working in pj’s, making fresh lunches, saving hours and hundreds of dollars or pounds a month on commutes (actually, always a win!), there’s a lot to like about it. Some of us, like the Wellfinity team, are used to working remotely — making cafes, co-working spaces, gym lounges, restaurants and our homes our very own workspaces.
-                    </p>
-                    <p>But with the pandemic, working from home has become a mandate for many employees who aren’t prepared for the subtle and not-so-subtle changes to their day.</p>
-                    <a href="#" class="rdmr">Read more</a>
-                </div>
-                <ul class="pagination justify-content-center">
+
+            @endif
+
+
+               <!--  <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
                       <a class="page-link" href="#" tabindex="-1">&laquo;</a>
                     </li>
@@ -94,177 +80,97 @@
                     <li class="page-item">
                       <a class="page-link" href="#">Next</a>
                     </li>
-                  </ul>
+                  </ul> -->
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="hldr">
                     <h4>Search Bar</h4>
+                    <form>
                     <div class="search">
-                        <input type="text" placeholder="Search your keyword">
+                        <input type="text" name="s" placeholder="Search your keyword" value="{{Request()->s}}">
                         <input type="submit" value="">
                     </div>
+                    </form>
                 </div>
                 <div class="hldr">
-                    <h4>About The Blog</h4>
-                    <p>We’ve always got something exciting to share. We’ll be bringing you posts around the four pillars of our business, nutrition, fitness, lifestyle, and mindfulness.</p>
-                    <p>Have an interesting post to share? Get in touch!</p>
+                  @foreach($extra_data as $val)
+    @if($val->type==3)
+                    <h4>{!!$val->title!!}</h4>
+                   {!!$val->body!!}
+                     @endif
+    @endforeach
                 </div>
                 <div class="hldr">
                     <h4>Top Categories</h4>
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <form>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="c" onchange="this.form.submit()">
                         <option selected>Select categories</option>
-                        <option value="1">Health & Wellness</option>
-                        <option value="2">Lifestyle</option>
-                        <option value="3">Nutrition</option>
-                        <option value="4">Scribe</option>
-                        <option value="5">Uncategorized</option>
-                        <option value="6">Wellfinity Events</option>
+                         @foreach($category as $val)
+                        <option <?php if(Request()->c==$val->id){echo"selected";}?> value="{!!$val->id!!}">{!!$val->name!!}</option>
+                        @endforeach
                       </select>
+                  </form>
                 </div>
                 <div class="hldr">
+                     @if($archive_list->count() > 0)
                     <h4>Archives</h4>
                     <ul class="Archives">
-                        <li><a href="#">January 2021 <i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                        <li><a href="#">November 2020 <i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                        <li><a href="#">October 2020 <i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                        <li><a href="#">September 2020 <i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                        <li><a href="#">August 2020 <i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                        <li><a href="#">July 2020 <i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                        <li><a href="#">March 2020 <i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                        <li><a href="#">April 2020 <i class="zmdi zmdi-long-arrow-right"></i></a></li>
+                        
+                         @foreach($archive_list as $val)
+                        <li><a href="{{url('/')}}/blog?year=<?=date('Y',strtotime($val->year));?>-<?=date('m',strtotime($val->month));?>">{!!$val->month!!} {!!$val->year!!} <i class="zmdi zmdi-long-arrow-right"></i></a></li>
+                         @endforeach
                     </ul>
+                    @endif
                 </div>
                 <div class="hldr">
+                     @if($servicelist->count() > 0)
                     <h4>Wellfinity Services</h4>
                     <div class="owl-carousel blog-service owl-theme">
+                         @foreach($servicelist as $lt_val)
+                          <?php
+$extra_datamn = get_fields_value_where('pages_extra',"page_id=".$lt_val->id,'id','desc');
+$i=0;
+?>
+   
+ @php($count=0)
+              @foreach($extra_datamn as $key => $val)
+    @if($val->type==1)
+    @php($count++)
                         <div class="item">
+                          
                             <div class="serv">
-                                <a href="#">
+                                <a href="{{url('/'.$lt_val->slug)}}">
                                     <div class="img-hldr">
-                                        <img src="{{ asset('frontend') }}/images/blog-service.png" alt="">
+                                         <img src="{{ asset('/uploads/'.$val->image2) }}" alt=""> 
                                     </div>
                                     <div class="icon">
-                                        <img src="{{ asset('frontend') }}/images/service-icon1.png" alt="">
+                                        <img src="{{ asset('/uploads/'.$val->image) }}" alt=""> 
                                     </div>
-                                    <p>Corporate Wellbeing</p>
+                                    <p>{!!$val->title!!}</p>
                                 </a>
                             </div>
+
+                           
+
                         </div>
-                        <div class="item">
-                          <div class="serv">
-                              <a href="#">
-                                  <div class="img-hldr">
-                                      <img src="{{ asset('frontend') }}/images/blog-service.png" alt="">
-                                  </div>
-                                  <div class="icon">
-                                      <img src="{{ asset('frontend') }}/images/service-icon2.png" alt="">
-                                  </div>
-                                  <p>Strategy</p>
-                              </a>
-                          </div>
-                      </div>
-                      <div class="item">
-                          <div class="serv">
-                              <a href="#">
-                                  <div class="img-hldr">
-                                      <img src="{{ asset('frontend') }}/images/blog-service.png" alt="">
-                                  </div>
-                                  <div class="icon">
-                                      <img src="{{ asset('frontend') }}/images/service-icon3.png" alt="">
-                                  </div>
-                                  <p>Creative</p>
-                              </a>
-                          </div>
-                      </div>
-                      <div class="item">
-                        <div class="serv">
-                            <a href="#">
-                                <div class="img-hldr">
-                                    <img src="{{ asset('frontend') }}/images/blog-service.png" alt="">
-                                </div>
-                                <div class="icon">
-                                    <img src="{{ asset('frontend') }}/images/service-icon4.png" alt="">
-                                </div>
-                                <p>Digital</p>
-                            </a>
-                        </div>
+
+                        @endif
+    @endforeach
+             @endforeach
+           
+               
                     </div>
-                    <div class="item">
-                        <div class="serv">
-                            <a href="#">
-                                <div class="img-hldr">
-                                    <img src="{{ asset('frontend') }}/images/blog-service.png" alt="">
-                                </div>
-                                <div class="icon">
-                                    <img src="{{ asset('frontend') }}/images/service-icon5.png" alt="">
-                                </div>
-                                <p>Talks</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="item">
-                      <div class="serv">
-                          <a href="#">
-                              <div class="img-hldr">
-                                  <img src="{{ asset('frontend') }}/images/blog-service.png" alt="">
-                              </div>
-                              <div class="icon">
-                                  <img src="{{ asset('frontend') }}/images/service-icon5.png" alt="">
-                              </div>
-                              <p>Production</p>
-                          </a>
-                      </div>
-                  </div>
-                  <div class="item">
-                      <div class="serv">
-                          <a href="#">
-                              <div class="img-hldr">
-                                  <img src="{{ asset('frontend') }}/images/blog-service.png" alt="">
-                              </div>
-                              <div class="icon">
-                                  <img src="{{ asset('frontend') }}/images/service-icon6.png" alt="">
-                              </div>
-                              <p>Unleashed</p>
-                          </a>
-                      </div>
-                  </div>
-                  <div class="item">
-                    <div class="serv">
-                        <a href="#">
-                            <div class="img-hldr">
-                                <img src="{{ asset('frontend') }}/images/blog-service.png" alt="">
-                            </div>
-                            <div class="icon">
-                                <img src="{{ asset('frontend') }}/images/service-icon7.png" alt="">
-                            </div>
-                            <p>Scribe</p>
-                        </a>
-                    </div>
-                </div>
-                      
-                <div class="item">
-                  <div class="serv">
-                      <a href="#">
-                          <div class="img-hldr">
-                              <img src="{{ asset('frontend') }}/images/blog-service.png" alt="">
-                          </div>
-                          <div class="icon">
-                              <img src="{{ asset('frontend') }}/images/service-icon9.png" alt="">
-                          </div>
-                          <p>Events</p>
-                      </a>
-                  </div>
-              </div>  
-                    </div>
+                     @endif
                 </div>
                 <div class="hldr follow">
                     <h4>Follow us</h4>
                     <ul class="social">
-                        <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
-                        <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
-                        <li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
-                        <li><a href="#"><i class="zmdi zmdi-pinterest"></i></a></li>
-                        <li><a href="#"><i class="zmdi zmdi-youtube-play"></i></a></li>
+                       <li><a href="{!!config('site.facebook_link')!!}" target="_blank"><i class="zmdi zmdi-facebook"></i></a></li>
+            <li><a href="{!!config('site.twitter_link')!!}" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
+          
+            <li><a href="{!!config('site.instagram_link')!!}" target="_blank"><i class="zmdi zmdi-instagram"></i></a></li>
+          <li><a href="{!!config('site.pinterest')!!}" target="_blank"><i class="zmdi zmdi-pinterest"></i></a></li>
+          <li><a href="{!!config('site.youtube_link')!!}" target="_blank"><i class="zmdi zmdi-youtube-play"></i></a></li>
                       </ul>
                 </div>
             </div>

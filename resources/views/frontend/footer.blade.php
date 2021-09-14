@@ -1,8 +1,16 @@
 @php
 $footer_menu_page = get_fields_value_where('pages',"(display_in='2' or display_in='3') and posttype='page'",'menu_order','asc');
+$bloglist = get_fields_value_where('pages',"posttype='post'",'id','desc',5);
+$inner_foot='';
+if($page->id==7)
+$inner_foot='inner-footer';
+else if($page->id==4)
+$inner_foot='inner-footer';
+else if($page->page_template==8)
+$inner_foot='inner-footer';
 @endphp
 
-  <div class="footer">
+  <div class="footer {{$inner_foot}}">
   <div class="footer-logo"><a href="{{ url('/') }}">
     
     <img src="{!! ( config('site.footer_logo') && File::exists(public_path('uploads/'.config('site.footer_logo'))) ) ? asset('/uploads/'.config('site.footer_logo')) : asset('/frontend/images/ftr-logo.png') !!}" alt="">
@@ -12,11 +20,14 @@ $footer_menu_page = get_fields_value_where('pages',"(display_in='2' or display_i
       <div class="col-lg-4 col-md-4 wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".2s ">
         <h6>Recent Posts</h6>
         <ul class="link">
-          <li><a href="#">Ten Tips for Working from Home</a></li>
-          <li><a href="#">2021: The Year You Finally Tell Your Story</a></li>
-          <li><a href="#">Vitamin D & Boosting Your Immunity, Sun Chlorella</a></li>
-          <li><a href="#">9 Ways To Purify Your Body Naturally, Aiko Jin</a></li>
-          <li><a href="#">Is coffee bad for you? Roberta Fusco</a></li>
+         
+           @foreach($bloglist as $lt_val)
+ <?php
+$extra_datamn = get_fields_value_where('pages_extra',"page_id=".$lt_val->id,'id','desc');
+$i=0;
+?>
+<li><a href="{{url('/'.$lt_val->slug)}}">{{strip_tags($lt_val->page_title)}}</a></li>
+  @endforeach
         </ul>
       </div>
       <div class="col-lg-2 col-md-2 wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".3s ">
@@ -49,10 +60,13 @@ $footer_menu_page = get_fields_value_where('pages',"(display_in='2' or display_i
       <div class="col-lg-3 col-md-3 wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".5s ">
         <h6>Keep In Touch With Us</h6>
         <p>Information about current events related to our company</p>
+         <form method="POST" action="{{ url('sub-form') }}" class="customvalidation">
+              @csrf
         <div class="newsletter">
-          <input type="text" placeholder="Email Address">
+          <input type="text" placeholder="Email Address" data-validation-engine="validate[required,custom[email]]" name="email" value="{{ old('email') }}">
           <input type="submit" value="Subscribe">
         </div>
+      </form>
         <ul class="social">
          <li><a href="{!!config('site.facebook_link')!!}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
             <li><a href="{!!config('site.twitter_link')!!}" target="_blank"><i class="fab fa-twitter"></i></a></li>
@@ -63,7 +77,7 @@ $footer_menu_page = get_fields_value_where('pages',"(display_in='2' or display_i
         </ul>
       </div>
       <div class="col-lg-12">
-        <p class="ftr-bottom">@2021 <a href="{{ url('/') }}">Wellfinity</a>. All Rights Reserved</p>
+        <p class="ftr-bottom">@<?=date('Y');?> <a href="{{ url('/') }}">{!!config('site.title')!!}</a>. {!!config('site.right_reserve')!!}</p>
       </div>
     </div>
   </div>
@@ -164,7 +178,7 @@ return ( event.ctrlKey || event.altKey
 });
 </script>
 
-@if(Session::has('message')) 
+<!-- @if(Session::has('message')) 
 <script>
  $(window).on('load', function () {
 
@@ -175,9 +189,55 @@ return ( event.ctrlKey || event.altKey
     setTimeout(function() { $('#alertMessage').fadeOut(); }, {!! config('site.message_show_time')*1000 !!});
   });
 </script>
-@endif
+@endif -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+      @if(Session::has('message')) 
 
+                            <script>
+                                swal({
+                                    title: "Done",
+                                    text: "{!! Session::get('message')!!}",
+                                    //timer: 5000,
+                                    icon: "success",
+                                    button: "ok",
+                                    type: 'success'
 
+                                });
+                            </script>
+
+   @endif
+
+@if(Session::has('successswt')) 
+
+                            <script>
+                                swal({
+                                    title: "Done",
+                                    text: "{!! Session::get('successswt')!!}",
+                                    //timer: 5000,
+                                    icon: "success",
+                                    button: "ok",
+                                    type: 'success'
+
+                                });
+                            </script>
+
+   @endif
+
+       @if(Session::has('errorswt')) 
+        
+        <script>
+        swal({
+        title: "Error",
+         text: "Sorry, something went wrong",
+        //timer: 5000,
+        icon: "error",
+        button: "ok",
+        type: 'error'
+        
+        });
+        </script>
+        
+       @endif
 @yield('more-scripts')
 
 </body>

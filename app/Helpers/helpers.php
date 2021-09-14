@@ -36,7 +36,7 @@ $page_template_extra_array['0'] = array('0'=>'0');
 $page_template_extra_array['1'] = array('1'=>'0','2'=>'1','3'=>'1','4'=>'1','5'=>'3','6'=>'1','7'=>'8','8'=>'1','9'=>'1','10'=>'6','11'=>'1','12'=>'8','13'=>'1','14'=>'1','15'=>'1');
 
 define("Page_Template_Extra_Array", serialize($page_template_extra_array));*/
-$form_array = array('0'=>'Contact Form', '1'=>'Home form', '2'=>'Payment Form', '3'=>'Job Apply Form','4'=>'Book Appoinment');//
+$form_array = array('0'=>'Contact Form');//
 define("Form_Array", serialize($form_array)); 
 
 $page_section_array = array(
@@ -61,6 +61,9 @@ $page_section_array = array(
   '18'=>'18. Title, Sub Title, Image, Image2 & Content',
   '19'=>'19. Title, Sub Title, Image, Image2, Content & Button',
   '20'=>'20. Title, Image, Content & Button',
+  '21'=>'21. Title, Image & Content ',
+  '22'=>'22. Title, Image, Image2 & Content',
+  '23'=>'23. Title, Image, Image2, Content & Button',
 );
 define("Page_Section_Array", serialize($page_section_array));
 

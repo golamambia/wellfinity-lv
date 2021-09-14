@@ -100,7 +100,7 @@ $page_section_array = unserialize(Page_Section_Array);
                 </div>
               </div>
 
-              <?php /*<div class="form-group clearfix">
+              <div class="form-group clearfix">
                 <label class="col-sm-2 control-label">Parent</label>
                 <div class="col-sm-4">
                   <select name="parent_id" class="form-control">
@@ -119,7 +119,8 @@ $page_section_array = unserialize(Page_Section_Array);
                 @endforeach
                   </select>
                 </div>
-              </div>*/ ?>
+              </div>
+
 
               <div class="form-group clearfix">
                 <label class="col-sm-2 control-label">Display in</label>
@@ -174,6 +175,18 @@ $page_section_array = unserialize(Page_Section_Array);
                 <label class="col-sm-2 control-label">Schema Code</label>
                 <div class="col-sm-10">
                   <textarea class="form-control" name="schema_code" placeholder="Enter ...">{{ old('schema_code') }}</textarea>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-sm-2 control-label">Category</label>
+                <div class="col-sm-10">
+                  <select name="category_id" id="category_id" class="form-control" data-validation-engine="validate[required]">
+                    <option value="">Select One</option>
+                    
+                    @foreach($category_list as $cat_list)
+                    <option value="{{$cat_list->id}}" {!!Request::old('category_id')==$cat_list->id?'selected':''!!}>{{ $cat_list->name }}</option>
+                    @endforeach 
+                  </select>
                 </div>
               </div>
 

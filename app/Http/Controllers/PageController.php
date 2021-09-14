@@ -14,6 +14,8 @@ use App\Models\Category;
 use App\Models\Country;
 use App\Models\Settings;
 use App\Models\Forms;
+use App\Models\Service_category; 
+use App\Models\Comment; 
 
 use Illuminate\Support\Facades\DB;
 
@@ -136,9 +138,10 @@ class PageController extends Controller
 				$display_in = $request->display_in;
 				$menu_order = $request->menu_order;
 				$menu_link = $request->menu_link;
+				$post_cat = $request->category_id;
 		$page_template = $request->page_template>0?$request->page_template:0;
 
-				$update_array = array('page_name' => $page_name, 'page_title' => $page_title, 'bannertext' => $bannertext, 'body' => $body, 'posttype' => $posttype, 'meta_title' => $meta_title, 'meta_keyword' => $meta_keyword, 'meta_description' => $meta_description, 'display_in' => $display_in, 'menu_order' => $menu_order, 'menu_link' => $menu_link);//, 'parent_id' => $parent_id
+				$update_array = array('page_name' => $page_name, 'page_title' => $page_title, 'bannertext' => $bannertext, 'body' => $body, 'posttype' => $posttype, 'meta_title' => $meta_title, 'meta_keyword' => $meta_keyword, 'meta_description' => $meta_description, 'display_in' => $display_in, 'menu_order' => $menu_order, 'menu_link' => $menu_link,'category_id'=>$post_cat);//, 'parent_id' => $parent_id
 
 					$update_array['schema_code'] = $request->schema_code;
 				if($request->hasfile('bannerimage'))
@@ -294,6 +297,7 @@ class PageController extends Controller
 		$display_in = $request->display_in;
 		$menu_order = $request->menu_order;
 		$menu_link = $request->menu_link;
+		$post_cat = $request->category_id;
 		$page_template = $request->page_template>0?$request->page_template:0;
 
 		$rules = array(
@@ -365,7 +369,7 @@ class PageController extends Controller
 				DB::table('pages_extra')->where('id', $val->id)->update($update_array1);
 			}
 
-			$update_array = array('page_name' => $page_name, 'page_title' => $page_title, 'bannertext' => $bannertext, 'body' => $body, 'posttype' => $posttype, 'meta_title' => $meta_title, 'meta_keyword' => $meta_keyword, 'meta_description' => $meta_description, 'display_in' => $display_in, 'menu_order' => $menu_order, 'menu_link' => $menu_link, 'parent_id' => $parent_id);//
+			$update_array = array('page_name' => $page_name, 'page_title' => $page_title, 'bannertext' => $bannertext, 'body' => $body, 'posttype' => $posttype, 'meta_title' => $meta_title, 'meta_keyword' => $meta_keyword, 'meta_description' => $meta_description, 'display_in' => $display_in, 'menu_order' => $menu_order, 'menu_link' => $menu_link, 'parent_id' => $parent_id,'category_id'=>$post_cat);//
 
 				$update_array['page_template'] = $page_template;
 				$update_array['schema_code'] = $request->schema_code;
@@ -564,8 +568,15 @@ class PageController extends Controller
 	/* Admin Add post Get*/
 	public function postadd()
 	{
+		$where = "status=1 ";
+		$orderby = 'rank';
+			$order = 'asc';
 		$all_pages = Page::get();//where('posttype','post')->
-		return view('admin.post.add', compact('all_pages'));
+		$item_display_per_page = config('admin.pagination');
+		$category_list  = Service_category::whereRaw($where)
+		->orderBy($orderby, $order)
+		->paginate($item_display_per_page);
+		return view('admin.post.add', compact('all_pages','category_list'));
 	}
 
 	/* Admin insert post Post*/
@@ -611,9 +622,10 @@ class PageController extends Controller
 				$display_in = $request->display_in;
 				$menu_order = $request->menu_order;
 				$menu_link = $request->menu_link;
+				$post_cat = $request->category_id;
 		$page_template = $request->page_template>0?$request->page_template:0;
 
-				$update_array = array('page_name' => $page_name, 'page_title' => $page_title, 'bannertext' => $bannertext, 'body' => $body, 'posttype' => $posttype, 'meta_title' => $meta_title, 'meta_keyword' => $meta_keyword, 'meta_description' => $meta_description, 'display_in' => $display_in, 'menu_order' => $menu_order, 'menu_link' => $menu_link, 'parent_id' => $parent_id);//
+				$update_array = array('page_name' => $page_name, 'page_title' => $page_title, 'bannertext' => $bannertext, 'body' => $body, 'posttype' => $posttype, 'meta_title' => $meta_title, 'meta_keyword' => $meta_keyword, 'meta_description' => $meta_description, 'display_in' => $display_in, 'menu_order' => $menu_order, 'menu_link' => $menu_link, 'parent_id' => $parent_id,'category_id'=>$post_cat);//
 
 				if($request->hasfile('bannerimage'))
 				{
@@ -749,11 +761,20 @@ class PageController extends Controller
 	/* Admin Update post Get*/
 	public function postedit($id)
 	{
+		$where = "status=1 ";
+		$orderby = 'rank';
+			$order = 'asc';
+		//$all_pages = Page::get();//where('posttype','post')->
+		$item_display_per_page = config('admin.pagination');
+		$category_list  = Service_category::whereRaw($where)
+		->orderBy($orderby, $order)
+		->paginate($item_display_per_page);
+
 		$all_pages = Page::where('id','!=',$id)->get();//where('posttype','post')->
 		$page = Page::where('id',$id)->where('posttype','post')->get();
 		$page_extra = PageExtra::where('page_id',$id)->orderBy('type', 'asc')->orderBy('rank', 'asc')->get();
 
-		return view('admin.post.edit', compact('page','page_extra','all_pages'));
+		return view('admin.post.edit', compact('page','page_extra','all_pages','category_list'));
 	}
 
 	/* Admin Update post Post*/
@@ -1103,7 +1124,7 @@ class PageController extends Controller
 	/* Contact Page Post*/
 	public function contactform(Request $request)
 	{
-		//$name = $request->name;
+		$name = $request->name;
 		$email = $request->email;
 		$message = $request->message;
 		//$company = $request->company;
@@ -1114,7 +1135,7 @@ class PageController extends Controller
 		//$remark = $request->remark;
 
 		$rules = array(
-			'fname' => 'required',
+			'name' => 'required',
 			'email' => 'required',
 			'message' => 'required',
 		);
@@ -1130,17 +1151,17 @@ class PageController extends Controller
 			try {
 				$obj = new Forms;
 				$obj->type = 0;
-				//$obj->name = $name;
-				$obj->fname = $request->fname;
-				$obj->lname = $request->lname;
+				$obj->name = $name;
+				//$obj->fname = $request->fname;
+				//$obj->lname = $request->lname;
 				$obj->email = $request->email;
-				$obj->phone = $request->phone;
-				$obj->address = $request->address;
-				$obj->zip = $request->zip;
-				$obj->state = $request->state;
-				$obj->city = $request->city;
-				$obj->reason = $request->reason;
-				$obj->email = $request->email;
+				//$obj->phone = $request->phone;
+				//$obj->address = $request->address;
+				//$obj->zip = $request->zip;
+				//$obj->state = $request->state;
+				//$obj->city = $request->city;
+				//$obj->reason = $request->reason;
+				$obj->website = $request->website;
 				$obj->message = $request->message;
 				
 				$obj->save();
@@ -1148,15 +1169,9 @@ class PageController extends Controller
 			
 			This e-mail was sent from the contact form on ".config('site.title')." website.<br><br>
 			
-			First Name: ".$request->fname."<br>
-			Last Name: ".$request->lname."<br>
+			Name: ".$request->name."<br>
 			Email: ".$request->email."<br>
-			Phone: ".$request->phone."<br>
-			Address: ".$request->address."<br>
-			Zip Code: ".$request->zip."<br>
-			State: ".$request->state."<br>
-			City: ".$request->city."<br>
-			Reason for Contact: ".$request->reason."<br>
+			Website: ".$request->website."<br>
 			Message: ".$request->message."<br>";
 
 			$admin_message_content = ['content' => $admin_message];
@@ -1177,6 +1192,81 @@ class PageController extends Controller
 		}
 	}
 
+
+	/* Contact Page Post*/
+	public function commentform(Request $request)
+	{
+	
+
+		$rules = array(
+			'fullname' => 'required',
+			'email' => 'required',
+			'message' => 'required',
+			'blogid' => 'required',
+		);
+
+		$validator = Validator::make($request->all() , $rules);
+
+		if ($validator->fails())
+		{
+			return redirect()->back()->withErrors($validator)->withInput(); 
+		}
+		else
+		{
+			try {
+				$obj = new Comment;
+				
+				$obj->fullname =  $request->fullname;
+				
+				$obj->email = $request->email;
+			
+				$obj->blogid = $request->blogid;
+				$obj->message = $request->message;
+				
+				$obj->save();
+			
+			return redirect()->back()->with('success', "Thank you for getting in touch!");
+			} catch (\Exception $e) {
+				DB::rollback();
+				return Redirect::back()->withErrors(array('errordetailsd' => $e->getMessage()))->withInput($request->all());
+			}
+		}
+	}
+
+	public function subscribe_form(Request $request)
+	{
+	
+
+		$rules = array(
+			
+			'email' => 'required',
+			
+		);
+
+		$validator = Validator::make($request->all() , $rules);
+
+		if ($validator->fails())
+		{
+			return redirect()->back()->withErrors($validator)->withInput(); 
+		}
+		else
+		{
+			try {
+				$obj = new Forms;
+				
+				$obj->type =1; 
+				$obj->email = $request->email;
+			
+				
+				$obj->save();
+			
+			return redirect()->back()->with('successswt', "Thank you for getting in touch!");
+			} catch (\Exception $e) {
+				DB::rollback();
+				return Redirect::back()->withErrors(array('errorswt' => $e->getMessage()))->withInput($request->all());
+			}
+		}
+	}
 	/* Need Support Form on Help Page Post*/
 	public function paymentform(Request $request)
 	{
@@ -1530,8 +1620,51 @@ if($request->hasfile('resume'))
 			}elseif($page->page_template=='3'){
 				return view('frontend.pages.services', compact('page','setting','page_url','page_image', 'extra_data','country'));
 			}elseif($page->page_template=='4'){
+				$category = DB::table('service_category')->where('status','1')->orderBy('rank', 'asc')->get();
 
-				return view('frontend.pages.blog', compact('page','setting','page_url','page_image', 'extra_data'));
+				$category = DB::table('service_category')->where('status','1')->orderBy('rank', 'asc')->get();
+				$servicelist = get_fields_value_where('pages',"posttype='service'",'id','desc');
+				$archive_list = DB::table('pages')->where('posttype','post')->selectRaw('year(created_at) year, monthname(created_at) month')
+                ->groupBy('year', 'month')
+                ->orderBy('year', 'desc')
+                ->get();
+               
+				$orderby = Request()->orderby;
+				$order = Request()->order;
+				$search = Request()->s;
+				$catsearch = Request()->c;
+				$archive_search = Request()->year;
+
+				if(!$orderby && !$order)
+				{
+					$orderby = 'created_at';
+					$order = 'desc';
+				}
+
+				$where = " posttype='post' ";
+				if ($catsearch) {
+					$where .= " and category_id=".$catsearch."";
+				}
+					if ($archive_search) {
+					$where .= " and pages.created_at like '%".$archive_search."%'";
+				}
+				if ($search) {
+					$where .= " and (";
+					$where .= "page_name like '%".$search."%'";
+					$where .= " or page_title like '%".$search."%'";
+					$where .= " or meta_title like '%".$search."%'";
+					$where .= ")";
+				}
+				$item_display_per_page = config('site.pagination');
+				$lists = DB::table('pages')->whereRaw($where)
+					->orderBy($orderby, $order)
+					 ->join('service_category', 'pages.category_id', '=', 'service_category.id')
+             		->select('pages.*', 'service_category.name as cat_name')
+					->paginate($item_display_per_page);
+
+				return view('frontend.pages.blog', compact('page','setting','page_url','page_image', 'extra_data','lists','category','servicelist','archive_list'));
+
+				// return view('frontend.pages.blog', compact('page','setting','page_url','page_image', 'extra_data'));
 			}elseif($page->page_template=='5'){
 				return view('frontend.pages.gallery', compact('page','setting','page_url','page_image', 'extra_data'));
 			}elseif($page->page_template=='6'){
@@ -1541,7 +1674,26 @@ if($request->hasfile('resume'))
 			}elseif($page->page_template=='8'){
 				return view('frontend.pages.service_details', compact('page','setting','page_url','page_image', 'extra_data'));
 			}elseif($page->page_template=='9'){
-				return view('frontend.pages.blog_details', compact('page','setting','page_url','page_image', 'extra_data'));
+				$item_display_per_page = config('site.pagination');
+				$where = " pages.id!=".$page->id." and category_id=".$page->category_id." ";
+				$lists = DB::table('pages')->whereRaw($where)
+					
+					 ->join('service_category', 'pages.category_id', '=', 'service_category.id')
+             		->select('pages.*', 'service_category.name as cat_name')
+					->paginate($item_display_per_page);
+$where22 ="blogid=".$page->id."";
+$comment_list = DB::table('comment')->whereRaw($where22)->orderBy('id','desc')->select('comment.*')->paginate($item_display_per_page);
+				$page = Page::where('slug',$slug)
+				 ->join('service_category', 'pages.category_id', '=', 'service_category.id')
+             		->select('pages.*', 'service_category.name as cat_name')
+				->first();
+				$archive_list = DB::table('pages')->where('posttype','post')->selectRaw('year(created_at) year, monthname(created_at) month')
+                ->groupBy('year', 'month')
+                ->orderBy('year', 'desc')
+                ->get();
+				$category = DB::table('service_category')->where('status','1')->orderBy('rank', 'asc')->get();
+				$servicelist = get_fields_value_where('pages',"posttype='service'",'id','desc');
+				return view('frontend.pages.blog_details', compact('page','setting','page_url','page_image', 'extra_data','category','servicelist','lists','comment_list','archive_list'));
 			}elseif($page->page_template=='14'){
 
 				$orderby = Request()->orderby;
@@ -1563,8 +1715,10 @@ if($request->hasfile('resume'))
 					$where .= ")";
 				}
 				$item_display_per_page = config('site.pagination');
-				$lists = Page::whereRaw($where)
+				$lists = DB::table('pages')->whereRaw($where)
 					->orderBy($orderby, $order)
+					 ->join('service_category', 'pages.category_id', '=', 'service_category.id')
+             		->select('pages.*', 'service_category.name as cat_name')
 					->paginate($item_display_per_page);
 
 				return view('frontend.pages.blog', compact('page','setting','page_url','page_image', 'extra_data','lists'));

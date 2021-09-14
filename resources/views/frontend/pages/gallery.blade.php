@@ -1,78 +1,37 @@
 @include('frontend.header')
 
-<div class="inner-banner" style="background: url({{ asset('frontend') }}/images/inner-banner-bg.png) no-repeat center">
+  @foreach($extra_data as $val)
+    @if($val->type==1)
+<div class="inner-banner" style="background: url({{ asset('/uploads/'.$val->image) }}) no-repeat center">
     <div class="container">
-        <h1>Our Gallery</h1>
+         @if($val->title)<h1>{!!$val->title!!}</h1>@endif
         <ul>
-            <li>Gallery</li>
+            <li>{{$page->page_title}}</li>
         </ul>
     </div>
 </div>
+ @endif
+    @endforeach
 
 
 
 <div class="gallery">
     <div class="container">
+       @foreach($extra_data as $val)
+    @if($val->type==2 && $val->image && File::exists(public_path('uploads/'.$val->image)))
       <div class="card">
         <div class="card-image">
-          <a href="{{ asset('frontend') }}/images/gallery1.png" data-fancybox="gallery" data-caption="">
-            <img src="{{ asset('frontend') }}/images/gallery1.png" alt="Image Gallery">
+          <a href="{{ asset('/uploads/'.$val->image) }}" data-fancybox="gallery" data-caption="">
+            <img src="{{ asset('/uploads/'.$val->image) }}" alt="Image Gallery">
             <div class="img-hldr">
               <img src="{{ asset('frontend') }}/images/zoom.png" alt="Image Gallery">
             </div>
           </a>
         </div>
       </div>
-      <div class="card">
-        <div class="card-image">
-          <a href="{{ asset('frontend') }}/images/gallery2.png" data-fancybox="gallery" data-caption="">
-            <img src="{{ asset('frontend') }}/images/gallery2.png" alt="Image Gallery">
-            <div class="img-hldr">
-              <img src="{{ asset('frontend') }}/images/zoom.png" alt="Image Gallery">
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-image">
-          <a href="{{ asset('frontend') }}/images/gallery3.png" data-fancybox="gallery" data-caption="">
-            <img src="{{ asset('frontend') }}/images/gallery3.png" alt="Image Gallery">
-            <div class="img-hldr">
-              <img src="{{ asset('frontend') }}/images/zoom.png" alt="Image Gallery">
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-image">
-          <a href="{{ asset('frontend') }}/images/gallery4.png" data-fancybox="gallery" data-caption="">
-            <img src="{{ asset('frontend') }}/images/gallery4.png" alt="Image Gallery">
-            <div class="img-hldr">
-              <img src="{{ asset('frontend') }}/images/zoom.png" alt="Image Gallery">
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-image">
-          <a href="{{ asset('frontend') }}/images/gallery5.png" data-fancybox="gallery" data-caption="">
-            <img src="{{ asset('frontend') }}/images/gallery5.png" alt="Image Gallery">
-            <div class="img-hldr">
-              <img src="{{ asset('frontend') }}/images/zoom.png" alt="Image Gallery">
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-image">
-          <a href="{{ asset('frontend') }}/images/gallery6.png" data-fancybox="gallery" data-caption="">
-            <img src="{{ asset('frontend') }}/images/gallery6.png" alt="Image Gallery">
-            <div class="img-hldr">
-              <img src="{{ asset('frontend') }}/images/zoom.png" alt="Image Gallery">
-            </div>
-          </a>
-        </div>
-      </div>
+ @endif
+    @endforeach
+
     </div>
     <div class="clearfix"></div>
 </div>

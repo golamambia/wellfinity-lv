@@ -46,7 +46,7 @@ class ServiceOfferedController extends Controller
 
 		$column_array = array('id' => 'Id', 'page_name' => 'Name', 'parent_id' => 'Parent', 'menu_order' => 'Order');
 		$search = Request()->search;
-		$where = "posttype='service_offer' ";
+		$where = "posttype='service' ";
 
 		if($search)
 		{
@@ -250,7 +250,7 @@ class ServiceOfferedController extends Controller
 				}
 
 				//return redirect()->back()->with('success', true);
-				return Redirect::to('admin/service_offer/edit/'.$page_id)->with('admin_msg', 'Page has been added successfully.');
+				return Redirect::to('admin/service/edit/'.$page_id)->with('admin_msg', 'Page has been added successfully.');
 
 			} catch (\Exception $e) {
 				DB::rollback();
@@ -307,7 +307,7 @@ class ServiceOfferedController extends Controller
 
 		if ($validator->fails())
 		{
-			return Redirect::to('admin/service_offer/edit/'.$id)->withErrors($validator) 
+			return Redirect::to('admin/service/edit/'.$id)->withErrors($validator) 
 			->withInput(); 
 		}
 		else

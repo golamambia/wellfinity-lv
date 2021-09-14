@@ -2,53 +2,46 @@
 
  <!------- inner banner area start ------->
 <!--Header End-->
-<div class="inner-banner" style="background: url({{ asset('frontend') }}/images/inner-banner-bg.png) no-repeat center">
+    @foreach($extra_data as $val)
+    @if($val->type==1)
+<div class="inner-banner" style="background: url({{ asset('/uploads/'.$val->image) }}) no-repeat center">
     <div class="container">
-        <h1>We work with companies of all sizes</h1>
+         @if($val->title)<h1>{!!$val->title!!}</h1>@endif
         <ul>
-            <li>About Us</li>
+            <li>{{$page->page_title}}</li>
         </ul>
     </div>
 </div>
+ @endif
+    @endforeach
 <div class="about">
     <div class="container">
         <div class="center-txt">
-            <h2>How Do <span>We Work</span></h2>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
-                tempor invidunt ut labore et dolore</p>
+             @foreach($extra_data as $val)
+    @if($val->type==2)
+            @if($val->title)<h2>{!!$val->title!!}</h2>@endif
+             @if($val->sub_title)<p>{!!$val->sub_title!!}</p>@endif
+                 @endif
+    @endforeach
         </div>
         <ul class="abt">
-            <li class=" wow fadeInLeft " data-wow-deuration="2s " data-wow-delay=".2s ">
-                <div class="num"><span>01</span></div>
+             @php($count=0)
+              @foreach($extra_data as $key => $val)
+    @if($val->type==3)
+    @php($count++)
+            <li class=" wow fadeInLeft " data-wow-deuration="2s " data-wow-delay=".{{$count + 1}}s ">
+                <div class="num"><span>0{{$count}}</span></div>
                 <div class="img-hldr">
-                    <img src="{{ asset('frontend') }}/images/abt1.png" alt="">         
+                    <img src="{{ asset('/uploads/'.$val->image) }}" alt="">         
                     <div class="txt">
-                        <h4>We <span>Think</span></h4>
-                        <p>We believe that people deserve to love what they do, that growing your business should be enjoyable and that organisations should focus on what they do best. We believe that the most successful teams are the ones that have days where they just don't feel like they're working.</p>
+                        <h4>{!!$val->title!!}</h4>
+                        {!!$val->body!!}
                     </div>
                 </div>   
             </li>
-            <li class=" wow fadeInRight " data-wow-deuration="2s " data-wow-delay=".3s ">
-                <div class="num"><span>02</span></div>
-                <div class="img-hldr">
-                    <img src="{{ asset('frontend') }}/images/abt2.png" alt="">
-                               
-                <div class="txt">
-                    <h4>We <span>Feel</span></h4>
-                    <p>We feel happiest when we are excited about what we do, when we share in your experiences and when we work with you towards common goals. We love to be creative and to go the extra mile to be the best we can. We find ways to keep the excitement going in what you do. </p>
-                </div>
-                </div> 
-            </li>
-            <li class=" wow fadeInLeft" data-wow-deuration="2s" data-wow-delay=".4s">
-                <div class="num"><span>03</span></div>
-                <div class="img-hldr">
-                    <img src="{{ asset('frontend') }}/images/abt3.png" alt="">            
-                    <div class="txt">
-                        <h4>We <span>Do</span></h4>
-                        <p>We take the time to understand your values and to take care of all the noise so that you can focus on doing what you do best. We do everything we can to facilitate the success of the people we work with. We do more than simply deliver the service.</p>
-                    </div>
-                </div>
-            </li>
+             @endif
+    @endforeach
+       
         </ul>
     </div>
     
@@ -59,30 +52,55 @@
     <div class="container">
       <div class="hldr">
         <div class="lft fadeInLeft " data-wow-deuration="2s " data-wow-delay=".2s ">
-          <h2>Let's <span>get connected</span></h2>
+             @foreach($extra_data as $key => $val)
+    @if($val->type==4)
+           @if($val->title)<h2>{!!$val->title!!}</h2>@endif
+           @endif
+    @endforeach
+       
           <ul>
-            <li><i class="zmdi zmdi-pin"></i> Building 3, 566 Chiswick High Road, Chiswick, W4 5YA</li>
-            <li><i class="zmdi zmdi-email"></i> hello@wellfinity.co.uk</li>
-            <li><i class="zmdi zmdi-phone-in-talk"></i> +447534067661</li>
+            <li><i class="zmdi zmdi-pin"></i> {!!config('site.address')!!}</li>
+            <li><i class="zmdi zmdi-email"></i>{!!config('site.email')!!}</li>
+            <li><i class="zmdi zmdi-phone-in-talk"></i> {!!config('site.phone')!!}</li>
           </ul>
-          <form>
+          @if($errors->any())   
+            <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+            @foreach ($errors->all() as $error)
+            {{ $error }}<br>
+            @endforeach
+            </div>
+            @endif
+          <form method="POST" action="{{ url('contact') }}" class="customvalidation">
+              @csrf
             <div class="form-group">
-              <input type="text" placeholder="Your full name*" class="form-control">
+              <input type="text" placeholder="Your full name*" data-validation-engine="validate[required]" name="name" class="form-control">
             </div>
             <div class="form-group">
-              <input type="email" placeholder="Your mail id**" class="form-control">
+              <input type="email" placeholder="Your mail id**" data-validation-engine="validate[required,custom[email]]" name="email" class="form-control">
             </div>
             <div class="form-group">
-              <input type="text" placeholder="Your website*" class="form-control">
+              <input type="text" placeholder="Your website*" class="form-control" data-validation-engine="validate[required]" name="website">
             </div>
             <div class="form-group">
-              <textarea class="form-control">Your message*</textarea>
+              <textarea placeholder="Your message*" class="form-control" data-validation-engine="validate[required]" name="message"></textarea>
             </div>
-            <input type="submit" value="Send message">
+             @foreach($extra_data as $key => $val)
+    @if($val->type==4)
+    @if($val->btn_text)
+            <input type="submit" value="{!!$val->btn_text?$val->btn_text:'Send'!!}">
+             @endif
+             @endif
+    @endforeach
           </form>
         </div>
         <div class="rht">
-          <img class=" wow fadeInRight " data-wow-deuration="2s " data-wow-delay=".2s " src="{{ asset('frontend') }}/images/hm-contact-img.png" alt="">
+            @foreach($extra_data as $key => $val)
+    @if($val->type==4)
+          <img class=" wow fadeInRight " data-wow-deuration="2s " data-wow-delay=".2s " src="{{ asset('/uploads/'.$val->image) }}" alt="">
+           @endif
+    @endforeach
         </div>
       </div>
     </div>

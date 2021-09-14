@@ -114,6 +114,7 @@ class TestimonialController extends Controller
 			try {
 			$name = $request->name; 
 			$status = $request->status;
+			
 
 			$obj = new Testimonial();
 			$obj->designation = $request->designation;
@@ -121,6 +122,7 @@ class TestimonialController extends Controller
 			$obj->name = $name;
 			$obj->body = $request->body;
 			$obj->status = $status; 
+			$obj->rating = $request->rating;
 			if($request->hasfile('image'))
 			{
 				$image = $request->file('image');
@@ -182,6 +184,7 @@ class TestimonialController extends Controller
 			$obj->name = $name;
 			$obj->body = $request->body;
 			$obj->status = $status;
+			$obj->rating = $request->rating;
 			if($request->hasfile('image'))
 			{
 				if($obj->image!='' && file_exists(public_path().'/uploads/'.$obj->image))

@@ -522,7 +522,8 @@ class SettingsController extends Controller
 				$update_array = array('value' => $request->site_google_body_tag);
 				Settings::where('id', '32')->update($update_array);
 
-
+				$update_array = array('value' => $request->site_right_reserve);
+				Settings::where('id', '33')->update($update_array);
 
 			return redirect()->back()->with('success', true);
 

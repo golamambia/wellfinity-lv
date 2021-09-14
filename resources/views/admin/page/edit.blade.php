@@ -294,7 +294,7 @@ $page_section_array = unserialize(Page_Section_Array);
                       </div>
                     </div>
                   @endif
-                  @if($val->section_type==9 || $val->section_type==10 || $val->section_type==11 || $val->section_type==12 || $val->section_type==16 || $val->section_type==17 || $val->section_type==18 || $val->section_type==19 || $val->section_type==20 || $val->section_type==21)
+                  @if($val->section_type==9 || $val->section_type==10 || $val->section_type==11 || $val->section_type==12 || $val->section_type==16 || $val->section_type==17 || $val->section_type==18 || $val->section_type==19 || $val->section_type==20 || $val->section_type==21 || $val->section_type==22 || $val->section_type==23)
                     <div class="form-group clearfix">
                       <label class="col-sm-2 control-label">Image</label>
                       <div class="col-sm-10">
@@ -314,7 +314,7 @@ $page_section_array = unserialize(Page_Section_Array);
                       </div>
                     </div>
                   @endif
-                  @if($val->section_type==11 || $val->section_type==12 || $val->section_type==18 || $val->section_type==19)
+                  @if($val->section_type==11 || $val->section_type==12 || $val->section_type==18 || $val->section_type==19 || $val->section_type==22 || $val->section_type==23)
                     <div class="form-group clearfix">
                       <label class="col-sm-2 control-label">Image 2</label>
                       <div class="col-sm-10">
@@ -334,7 +334,7 @@ $page_section_array = unserialize(Page_Section_Array);
                       </div>
                     </div>
                   @endif
-                  @if($val->section_type=="1" || $val->section_type==4 || $val->section_type==13 || $val->section_type==14 || $val->section_type==15 || $val->section_type==16 || $val->section_type==17 || $val->section_type==18 || $val->section_type==19 || $val->section_type==20 || $val->section_type==21)
+                  @if( $val->section_type==4 || $val->section_type==13 || $val->section_type==14 || $val->section_type==15 || $val->section_type==16 || $val->section_type==17 || $val->section_type==18 || $val->section_type==19 || $val->section_type==20 || $val->section_type==21 || $val->section_type==22 || $val->section_type==23)
                     <div class="form-group clearfix">
                       <label class="col-sm-2 control-label">Content</label>
                       <div class="{{$val->section_type==4?'col-sm-8':'col-sm-10'}}">
@@ -350,7 +350,7 @@ $page_section_array = unserialize(Page_Section_Array);
                       @endif
                     </div>
                   @endif 
-                  @if($val->section_type==1 || $val->section_type==5 || $val->section_type==6 || $val->section_type==7 || $val->section_type==10 || $val->section_type==12 || $val->section_type==15 || $val->section_type==17 || $val->section_type==19 || $val->section_type==20)
+                  @if( $val->section_type==5 || $val->section_type==6 || $val->section_type==7 || $val->section_type==10 || $val->section_type==12 || $val->section_type==15 || $val->section_type==17 || $val->section_type==19 || $val->section_type==20 || $val->section_type==23)
                     <div class="form-group clearfix">
                       <label class="col-sm-2 control-label">Button Text</label>
                       <div class="{{$val->section_type==5 || $val->section_type==6?'col-sm-8':'col-sm-10'}}">
@@ -1083,6 +1083,7 @@ $page_section_array = unserialize(Page_Section_Array);
     </div>
   </div>
 </div>
+
 <div class="copy type21 hide"> 
   <div class="sn">   
     <div class="form-group clearfix">
@@ -1095,7 +1096,7 @@ $page_section_array = unserialize(Page_Section_Array);
       </div>
       <div class="col-sm-1"><a href="javascript:;" class="remove_field">Remove</a></div>
     </div> 
-    
+   
     <div class="form-group clearfix">
       <label class="col-sm-2 control-label">Image</label>
       <div class="col-sm-10">
@@ -1109,26 +1110,40 @@ $page_section_array = unserialize(Page_Section_Array);
         <textarea class="form-control ckeditor" name="section_new_c[]" placeholder="Enter ..."></textarea>
       </div>
     </div>
-   
+    
   </div>
 </div>
-<div class="copy type21 hide"> 
+
+<div class="copy type22 hide"> 
   <div class="sn">   
     <div class="form-group clearfix">
       <input type="hidden" name="type[]" value="">
-      <input type="hidden" name="section_type[]" value="21">
-      <input type="hidden" name="section_new_img2[]" value="">
+      <input type="hidden" name="section_type[]" value="22">
+      <input type="hidden" name="section_new_btn_text[]" value="">
+      <input type="hidden" name="section_new_btn_url[]" value="">
       <label class="col-sm-2 control-label">Title</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" name="section_new_t[]" placeholder="Enter ..." value="" data-validation-engine="validate[required]">
       </div>
       <div class="col-sm-1"><a href="javascript:;" class="remove_field">Remove</a></div>
     </div> 
-   
+   <!--  <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Sub Title</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="section_new_st[]" placeholder="Enter ..." value="">
+      </div>
+    </div> -->
     <div class="form-group clearfix">
       <label class="col-sm-2 control-label">Image</label>
       <div class="col-sm-10">
         <input type="file" name="section_new_img[]" data-validation-engine="validate[,custom[validateMIME[image/jpeg|image/jpg|image/png|image/gif|image/svg]]]">
+        Mime Type: jpeg,png,jpg,gif,svg, Max image upload size 2 Mb<br>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Image 2</label>
+      <div class="col-sm-10">
+        <input type="file" name="section_new_img2[]" data-validation-engine="validate[,custom[validateMIME[image/jpeg|image/jpg|image/png|image/gif|image/svg]]]">
         Mime Type: jpeg,png,jpg,gif,svg, Max image upload size 2 Mb<br>
       </div>
     </div>
@@ -1138,7 +1153,58 @@ $page_section_array = unserialize(Page_Section_Array);
         <textarea class="form-control ckeditor" name="section_new_c[]" placeholder="Enter ..."></textarea>
       </div>
     </div>
-    
+  </div>
+</div>
+
+<div class="copy type23 hide"> 
+  <div class="sn">   
+    <div class="form-group clearfix">
+      <input type="hidden" name="type[]" value="">
+      <input type="hidden" name="section_type[]" value="23">
+      <label class="col-sm-2 control-label">Title</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="section_new_t[]" placeholder="Enter ..." value="" data-validation-engine="validate[required]">
+      </div>
+      <div class="col-sm-1"><a href="javascript:;" class="remove_field">Remove</a></div>
+    </div> 
+  <!--   <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Sub Title</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="section_new_st[]" placeholder="Enter ..." value="">
+      </div>
+    </div> -->
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Image</label>
+      <div class="col-sm-10">
+        <input type="file" name="section_new_img[]" data-validation-engine="validate[,custom[validateMIME[image/jpeg|image/jpg|image/png|image/gif|image/svg]]]">
+        Mime Type: jpeg,png,jpg,gif,svg, Max image upload size 2 Mb<br>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Image 2</label>
+      <div class="col-sm-10">
+        <input type="file" name="section_new_img2[]" data-validation-engine="validate[,custom[validateMIME[image/jpeg|image/jpg|image/png|image/gif|image/svg]]]">
+        Mime Type: jpeg,png,jpg,gif,svg, Max image upload size 2 Mb<br>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Content</label>
+      <div class="col-sm-10">
+        <textarea class="form-control ckeditor" name="section_new_c[]" placeholder="Enter ..."></textarea>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Button Text</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="section_new_btn_text[]" placeholder="Enter ..." value="">
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <label class="col-sm-2 control-label">Button URL</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="section_new_btn_url[]" placeholder="Enter ..." value="">
+      </div>
+    </div>
   </div>
 </div>
 @section('more-scripts')

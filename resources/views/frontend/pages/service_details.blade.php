@@ -1,86 +1,83 @@
 @include('frontend.header')
-<div class="inner-banner" style="background: url({{ asset('frontend') }}/images/inner-banner-bg.png) no-repeat center">
+<?php
+$service = get_fields_value_where('pages',"page_template=3",'id','desc');
+
+?>
+@foreach($service as $lval)
+<?php
+
+$service_extra = get_fields_value_where('pages_extra',"page_id=".$lval->id,'id','desc');
+?>
+@foreach($service_extra as $val)
+  @if($val->type==1)
+<div class="inner-banner" style="background: url({{ asset('/uploads/'.$val->image) }}) no-repeat center">
     <div class="container">
-        <h1>What we Serve</h1>
+         @if($val->title)<h1>{!!$val->title!!}</h1>@endif
         <ul>
-            <li>Services</li>
-            <li>Our Strategy</li>
+          <li><a href="{{ url('/') }}/{!!$lval->slug!!}">{{$val->title}}</a></li>
+            <li>{!!$page->page_title!!}</li>
+
         </ul>
     </div>
 </div>
+ @endif
+ @endforeach
+@endforeach
 <div class="service-details">
     <div class="container">
         <div class="row">
             <div class="col-lg-5 col-md-5 wow fadeInLeft " data-wow-deuration="2s " data-wow-delay=".2s ">
-                <div class="img-hldr"><img src="{{ asset('frontend') }}/images/service-details.png" alt=""></div>
+                <div class="img-hldr">
+                  @foreach($extra_data as $val)
+            @if($val->type==2)
+                  @if($val->image && File::exists(public_path('uploads/'.$val->image2))) <img src="{{ asset('/uploads/'.$val->image2) }}" alt="service" title="">   @endif 
+                   @endif
+            @endforeach
+                </div>
             </div>
             <div class="col-lg-7 col-md-7 wow fadeInRight " data-wow-deuration="2s " data-wow-delay=".2s ">
                 <div class="hldr">
+                  @foreach($extra_data as $val)
+            @if($val->type==2)
                     <div class="title">
-                        <div class="icon"><img src="{{ asset('frontend') }}/images/service-details-icon.png" alt=""></div>
-                        <h3>Our Strategy</h3>
+                        <div class="icon">
+                           @if($val->image && File::exists(public_path('uploads/'.$val->image))) <img src="{{ asset('/uploads/'.$val->image) }}" alt="service" title="">   @endif 
+                        </div>
+                        <h3>{!!$val->title!!}</h3>
                     </div>
-                    <p>There’s no greater feeling than watching your company expand and flourish, and healthy growth starts with a solid strategy. Our talented sales, management and marketing strategists specialize in making that feeling a consistent reality by combining the thoughtful insights with a customized, innovative approach that keeps your business flexible in an ever-changing digital world.                    </p>
-                    <p><span>Has the change in market affected your business?</span></p>
-                    <p>Reach out to our incredible marketing team today, we’d love to join you on your journey to success!</p>
-                    <a href="#">Get in touch</a>
+                   {!!$val->body!!}
+                   <a href="{{url('/'.$val->btn_url)}}" >{!!$val->btn_text?$val->btn_text:'Get in touch'!!}</a>
+                   
+
+                     @endif
+            @endforeach
                 </div>
             </div>
             <div class="col-lg-12">
               <div class="center-txt wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".2s ">
-                <h2>Here's What <span>We offer</span></h2>
-                <p>We Specialize in Creating Great Quality Templates and
-                  Our Engorgio Can Prove it!</p>
+                 @foreach($extra_data as $val)
+            @if($val->type==3)
+                <h2>{!!$val->title!!}</h2>
+                <p>{!!$val->sub_title!!}</p>
+                  @endif
+            @endforeach
               </div>
             </div>
-            <div class="col-lg-4 col-md-4 wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".1s ">
+             @php($count=0)
+             @foreach($extra_data as $val)
+            @if($val->type==4)
+             @php($count++)
+            <div class="col-lg-4 col-md-4 wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".{{$count + 1}}s ">
               <div class="Dtlshldr">
-                <div class="icon"><img src="{{ asset('frontend') }}/images/service-details-icon1.png" alt=""></div>
-                <h4>Revenue Generation &<br>
-                  <span>Monetisation</span></h4>
-                  <p>Growing the bottom line is something every business needs. We'll work with you to identify resources that have been untapped, and explore monetisation strategies to increase revenue into your business</p>
+                <div class="icon">@if($val->image && File::exists(public_path('uploads/'.$val->image))) <img src="{{ asset('/uploads/'.$val->image) }}" alt="service" title="">   @endif </div>
+                <h4>{!!$val->title!!}</h4>
+                  {!!$val->body!!}
               </div>
             </div>
-            <div class="col-lg-4 col-md-4 wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".2s ">
-              <div class="Dtlshldr">
-                <div class="icon"><img src="{{ asset('frontend') }}/images/service-details-icon2.png" alt=""></div>
-                <h4>Revenue Generation &<br>
-                  <span>Monetisation</span></h4>
-                  <p>Growing the bottom line is something every business needs. We'll work with you to identify resources that have been untapped, and explore monetisation strategies to increase revenue into your business</p>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".3s ">
-              <div class="Dtlshldr">
-                <div class="icon"><img src="{{ asset('frontend') }}/images/service-details-icon3.png" alt=""></div>
-                <h4>Revenue Generation &<br>
-                  <span>Monetisation</span></h4>
-                  <p>Growing the bottom line is something every business needs. We'll work with you to identify resources that have been untapped, and explore monetisation strategies to increase revenue into your business</p>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".4s ">
-              <div class="Dtlshldr">
-                <div class="icon"><img src="{{ asset('frontend') }}/images/service-details-icon4.png" alt=""></div>
-                <h4>Sales & Marketing                  <br>
-                  <span>Plans</span></h4>
-                  <p>Growing the bottom line is something every business needs. We'll work with you to identify resources that have been untapped, and explore monetisation strategies to increase revenue into your business</p>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".5s ">
-              <div class="Dtlshldr">
-                <div class="icon"><img src="{{ asset('frontend') }}/images/service-details-icon5.png" alt=""></div>
-                <h4>Management<br>
-                  <span>Consultancy</span></h4>
-                  <p>Growing the bottom line is something every business needs. We'll work with you to identify resources that have been untapped, and explore monetisation strategies to increase revenue into your business</p>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 wow fadeInUp " data-wow-deuration="2s " data-wow-delay=".6s ">
-              <div class="Dtlshldr">
-                <div class="icon"><img src="{{ asset('frontend') }}/images/service-details-icon6.png" alt=""></div>
-                <h4>New Business &<br>
-                <span>Start UPs</span></h4>
-                  <p>Growing the bottom line is something every business needs. We'll work with you to identify resources that have been untapped, and explore monetisation strategies to increase revenue into your business</p>
-              </div>
-            </div>
+           
+            @endif
+            @endforeach
+
         </div>
     </div>
     <div class="bgg">

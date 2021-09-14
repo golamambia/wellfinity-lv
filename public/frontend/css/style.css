@@ -10,7 +10,7 @@ html {
   scroll-behavior: smooth;
 }
 
-ul {
+ul, ol {
   padding: 0;
   margin: 0;
   list-style-type: none;
@@ -395,9 +395,11 @@ h2::before, .txt-white::before {
   top: -15px;
   text-align: center;
   padding: 12px 0;
+  overflow: hidden;
 }
 .hm-service ul li .img-hldr .txt .icon img {
   vertical-align: middle;
+  margin-top: -13px;
 }
 .hm-service ul li .img-hldr .txt h3 {
   color: #1C111F;
@@ -665,6 +667,7 @@ h2::before, .txt-white::before {
   width: 100%;
   position: relative;
   padding-top: 50px;
+  overflow: hidden;
 }
 .hm-contact::before {
   position: absolute;
@@ -1791,4 +1794,138 @@ h2::before, .txt-white::before {
   padding-top: 26%;
   right: 13%;
   width: 87%;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*------------------------- About Us End -------------------------*/
+.blog-post {
+  position: relative;
+  padding-top: 0;
+  margin-top: -35px;
+  z-index: 99;
+}
+.blog-post::before, .blog-post::after {
+  display: none;
+}
+.blog-post .hldr {
+  background-color: white;
+}
+
+.sld-hldr {
+  margin-bottom: 60px !important;
+}
+
+.high-para {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.high-para a {
+  color: var(--base-color);
+}
+
+.r-row {
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  padding: 40px 20px 10px 10px;
+  margin-bottom: 80px;
+}
+.r-row .img-hldr {
+  position: absolute !important;
+  width: 90% !important;
+  height: 154px;
+  margin: 0 !important;
+}
+.r-row .img-hldr img {
+  min-height: 100%;
+  min-width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.r-row .date-blog {
+  background-color: var(--base-color);
+  padding: 15px 10px;
+}
+.r-row .date-blog p, .r-row .date-blog .center-txt .whiteP, .center-txt .r-row .date-blog .whiteP {
+  color: white;
+  text-align: center;
+  margin-bottom: 0;
+}
+.r-row .date-blog p:first-child, .r-row .date-blog .center-txt .whiteP:first-child, .center-txt .r-row .date-blog .whiteP:first-child {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.r-row .date-blog p:last-child, .r-row .date-blog .center-txt .whiteP:last-child, .center-txt .r-row .date-blog .whiteP:last-child {
+  margin-bottom: 0;
+}
+.r-row .para-blog p, .r-row .para-blog .center-txt .whiteP, .center-txt .r-row .para-blog .whiteP {
+  font-weight: 500;
+}
+.r-row .para-blog p span, .r-row .para-blog .center-txt .whiteP span, .center-txt .r-row .para-blog .whiteP span {
+  color: var(--base-color);
+}
+
+.r-blog {
+  display: -webkit-inline-box;
+}
+.r-blog h3 {
+  width: calc(100% - 20px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.reply-hldr {
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  padding: 25px 20px;
+}
+.reply-hldr .hm-contact {
+  padding-top: 20px;
+}
+.reply-hldr .hm-contact .form-group input, .reply-hldr .hm-contact .form-group textarea {
+  font-size: 0.8rem;
+}
+.reply-hldr input[type=submit] {
+  width: 254px;
+  height: 49px;
+  text-align: center;
+  color: #fff;
+  background: var(--base-color);
+  font-size: 20px;
+  font-weight: 400;
+  border: none;
+}
+
+.comments {
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  padding: 25px 20px;
+  margin-top: 3rem !important;
+}
+.comments li {
+  border-top: 1px solid #C4C4C4;
+  padding: 15px 0;
+}
+.comments .media-list .img-hldr {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 64px;
+  height: 64px;
+  margin-right: 15px;
+}
+.comments h4 {
+  color: #1C111F;
+}
+.comments h4 a {
+  color: #1C111F;
+  font-size: 16px;
+}
+.comments p, .comments .center-txt .whiteP, .center-txt .comments .whiteP {
+  color: #1C111F;
+  margin: 0;
+}
+.comments p a, .comments .center-txt .whiteP a, .center-txt .comments .whiteP a {
+  color: #1C111F;
+}
+
+/*------------------------- Blog Post  End -------------------------*//*# sourceMappingURL=style.css.map */

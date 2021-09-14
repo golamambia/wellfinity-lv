@@ -8,7 +8,7 @@ body {
 html {
     scroll-behavior: smooth;
   }
-ul {
+ul, ol {
     padding: 0; 
     margin: 0;
     list-style-type: none;
@@ -414,8 +414,10 @@ h2 {
                         top: -15px;
                         text-align: center;
                         padding: 12px 0;
+                        overflow: hidden;
                         img {
                             vertical-align: middle;
+                            margin-top: -13px;
                         }
                     }
                     h3 {
@@ -688,6 +690,7 @@ h2 {
     width: 100%;
     position: relative;
     padding-top: 50px;
+    overflow: hidden;
     &::before {
         position: absolute;
         content: "";
@@ -1818,3 +1821,138 @@ h2 {
         }
     }
 }
+
+
+
+/*------------------------- About Us End -------------------------*/
+.blog-post {
+    position: relative;
+    padding-top: 0;
+    margin-top: -35px;
+    z-index: 99;
+    &::before,&::after {
+        display: none;
+    }
+    .hldr {
+        background-color: white;
+    }
+}
+.sld-hldr {
+    margin-bottom: 60px !important;
+  }
+  .high-para {
+    background-color: rgba(0, 0, 0, .03);
+    a {
+        color: var(--base-color);
+    }
+  }
+  .r-row {
+      box-shadow: 0px 0px 6px  rgba($color: #000000, $alpha: .2);
+      background-color: white;
+      padding: 40px 20px 10px 10px;
+      margin-bottom: 80px;
+      .img-hldr {
+        position: absolute !important;
+        width: 90% !important;
+        height: 154px;
+        margin: 0 !important;
+        img {
+            min-height: 100%;
+            min-width: 100%;
+            object-fit: cover;
+        }
+    }
+    .date-blog {
+        background-color: var(--base-color);
+        padding: 15px 10px;
+        p {
+            color: white;
+            text-align: center;
+            margin-bottom: 0;
+            &:first-child {
+                font-size: 2rem;
+                font-weight: 400;
+                margin-bottom: 8px;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    .para-blog {
+        p {
+            font-weight: 500;
+            span {
+                color: var(--base-color);
+            }
+        }
+    }
+  }
+  .r-blog {
+    display:-webkit-inline-box;
+    h3 {
+        width: calc(100% - 20px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-right: 8px;
+    }
+  }
+.reply-hldr {
+    box-shadow: 0px 0px 6px  rgba($color: #000000, $alpha: .2);
+    background-color: white;
+    padding: 25px 20px;
+    .hm-contact {
+        padding-top: 20px;
+        .form-group {
+            input, textarea {
+                font-size: .8rem;
+            } 
+        }
+    }
+    input[type="submit"] {
+        width: 254px;
+        height: 49px;
+        text-align: center;
+        color: #fff;
+        background: var(--base-color);
+        font-size: 20px;
+        font-weight: 400;
+        border: none;
+    }
+    
+}
+
+.comments {
+        box-shadow: 0px 0px 6px rgb(0 0 0 / 20%);
+    background-color: white;
+    padding: 25px 20px;
+    margin-top: 3rem!important;
+    li {
+        border-top: 1px solid #C4C4C4;
+    padding: 15px 0;}
+    .media-list {
+        .img-hldr {
+            border-radius: 50%;
+            overflow: hidden;
+            width: 64px;
+            height: 64px;
+            margin-right: 15px;
+        }
+    }
+    h4 {color: #1C111F;
+        a {
+            color: #1C111F;
+            font-size: 16px;
+        }
+    }
+    p {
+        color: #1C111F;
+        margin: 0;
+        a {
+            color: #1C111F;
+        }
+    }
+}
+
+/*------------------------- Blog Post  End -------------------------*/

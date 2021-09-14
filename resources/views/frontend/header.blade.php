@@ -127,10 +127,10 @@ $header_class = 'privacy-header';
              
               </ul>
             </div>
-            <form id="app" action="#">
+            <form id="app" action="{{url('/')}}/blog" method="get">
               <label :data-state="state" for="search">
-                <input type="text" placeholder="Search" @click="state = 'opan'" @blur="state='close'"/>
-                <i class="zmdi zmdi-search"></i>
+                <input type="text" placeholder="Search" @click="state = 'opan'" @blur="state='close'" name="c" value="{{Request()->s}}"/>
+                <i class="zmdi zmdi-search" onclick="this.form.submit()"></i>
               </label>
               </form>
             </nav>

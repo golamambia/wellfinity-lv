@@ -43,33 +43,8 @@
       </li>
 
      
-<!--   <li class="treeview {{ (Request::is('admin/location') || Request::is('admin/location/add') || Request::is('admin/location/edit/*')? 'active' : '') }}">
-        <a href="#">
-          <i class="fa fa-circle-o"></i> <span>Locations</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li class="{{ (Request::is('admin/location')  ? 'active' : '') }}"><a href="{{ url('/admin/location') }}"><i class="fa fa-circle-o"></i> Locations</a></li>
-          <li class="{{ (Request::is('admin/location/add') || Request::is('admin/location/edit/*') ? 'active' : '') }}"><a href="{{ url('/admin/location/add') }}"><i class="fa fa-circle-o"></i> Add Location</a></li>
-        
-        </ul>
-      </li> -->
-     <!--  <li class="treeview {{ (Request::is('admin/where_begin') || Request::is('admin/where_begin/add') || Request::is('admin/where_begin/edit/*')? 'active' : '') }}">
-        <a href="#">
-          <i class="fa fa-circle-o"></i> <span>Where to Begins</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li class="{{ (Request::is('admin/where_begin')  ? 'active' : '') }}"><a href="{{ url('/admin/where_begin') }}"><i class="fa fa-circle-o"></i> Where to Begins</a></li>
-          <li class="{{ (Request::is('admin/where_begin/add') || Request::is('admin/where_begin/edit/*') ? 'active' : '') }}"><a href="{{ url('/admin/where_begin/add') }}"><i class="fa fa-circle-o"></i> Add page</a></li>
-        
-        </ul>
-      </li> -->
-      <li class="treeview {{ (Request::is('admin/service_offer') || Request::is('admin/service_offer/add') || Request::is('admin/service_offer/edit/*')? 'active' : '') }}">
+
+      <li class="treeview {{ (Request::is('admin/service') || Request::is('admin/service/add') || Request::is('admin/service/edit/*')? 'active' : '') }}">
         <a href="#">
           <i class="fa fa-circle-o"></i> <span>Services</span>
           <span class="pull-right-container">
@@ -77,12 +52,12 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li class="{{ (Request::is('admin/service_offer')  ? 'active' : '') }}"><a href="{{ url('/admin/service_offer') }}"><i class="fa fa-circle-o"></i> Service</a></li>
-          <li class="{{ (Request::is('admin/service_offer/add') || Request::is('admin/service_offer/edit/*') ? 'active' : '') }}"><a href="{{ url('/admin/service_offer/add') }}"><i class="fa fa-circle-o"></i> Add page</a></li>
+          <li class="{{ (Request::is('admin/service')  ? 'active' : '') }}"><a href="{{ url('/admin/service') }}"><i class="fa fa-circle-o"></i> Service</a></li>
+          <li class="{{ (Request::is('admin/service/add') || Request::is('admin/service/edit/*') ? 'active' : '') }}"><a href="{{ url('/admin/service/add') }}"><i class="fa fa-circle-o"></i> Add page</a></li>
         
         </ul>
       </li>
-      <li class="treeview {{ (Request::is('admin/post') || Request::is('admin/post/add') || Request::is('admin/post/edit/*')? 'active' : '') }}">
+      <li class="treeview {{ (Request::is('admin/post') || Request::is('admin/post/add') || Request::is('admin/post/edit/*') || Request::is('admin/blog_category') || Request::is('admin/blog_category/add') || Request::is('admin/blog_category/edit/*')? 'active' : '') }}">
         <a href="#">
           <i class="fa fa-circle-o"></i> <span>Blog Post</span>
           <span class="pull-right-container">
@@ -92,10 +67,22 @@
         <ul class="treeview-menu">
           <li class="{{ (Request::is('admin/post')  ? 'active' : '') }}"><a href="{{ url('/admin/post') }}"><i class="fa fa-circle-o"></i>Blog Post</a></li>
           <li class="{{ (Request::is('admin/post/add') || Request::is('admin/post/edit/*') ? 'active' : '') }}"><a href="{{ url('/admin/post/add') }}"><i class="fa fa-circle-o"></i> Add Post</a></li>
-        
+        <li class="{{ (Request::is('admin/blog_category') || Request::is('admin/blog_category/add') || Request::is('admin/blog_category/edit/*') ? 'active' : '') }}"><a href="{{ url('/admin/blog_category') }}"><i class="fa fa-circle-o"></i> Category</a></li>
         </ul>
       </li>
-
+  <li class="treeview {{ (Request::is('admin/testimonial') || Request::is('admin/testimonial/add') || Request::is('admin/testimonial/edit/*') || Request::is('admin/testimonial_logo') || Request::is('admin/testimonial_logo/add') || Request::is('admin/testimonial_logo/edit/*') ? 'active' : '') }}">
+        <a href="#">
+          <i class="fa fa-circle-o"></i> <span>Testimonials</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="{{ (Request::is('admin/testimonial') ? 'active' : '') }}"><a href="{{ url('/admin/testimonial') }}"><i class="fa fa-circle-o"></i> Testimonials</a></li>
+          <li class="{{ (Request::is('admin/testimonial/add') || Request::is('admin/testimonial/edit/*') ? 'active' : '') }}"><a href="{{ url('/admin/testimonial/add') }}"><i class="fa fa-circle-o"></i> Add Testimonial</a></li>
+          
+        </ul>
+      </li>
           
       <li class="treeview {{ (Request::is('admin/forms') || Request::is('admin/forms/view/*') ? 'active' : '') }}">
         <a href="#">

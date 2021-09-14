@@ -180,6 +180,19 @@ $page_section_array = unserialize(Page_Section_Array);
                 </div>
               </div>
 
+              <div class="form-group clearfix">
+                <label class="col-sm-2 control-label">Category</label>
+                <div class="col-sm-10">
+                  <select name="category_id" id="category_id" class="form-control" data-validation-engine="validate[required]">
+                    <option value="">Select One</option>
+                    
+                    @foreach($category_list as $cat_list)
+                    <option value="{{$cat_list->id}}" {!!$page[0]->category_id==$cat_list->id?'selected':''!!}>{{ $cat_list->name }}</option>
+                    @endforeach 
+                  </select>
+                </div>
+              </div>
+
                 <div class="form-group clearfix bannerimage">
                   <label class="col-sm-2 control-label">Feature Image</label>
                   <div class="col-sm-10">
